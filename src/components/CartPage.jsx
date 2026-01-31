@@ -62,39 +62,46 @@ const CartPage = () => {
       ) : (
         <>
           {/* Cart Items */}
-          <div className="grid gap-4 md:gap-8 mb-8 md:mb-16">
+          <div className="grid gap-4 md:gap-8 mb-6 md:mb-16">
             {safeItems.map((item) => (
-              <div key={item.id} className="bg-surface border border-surface-border rounded-2xl p-4 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center hover:shadow-sm transition-all duration-300 hover:scale-[1.02]">
-                <div className="mb-4 md:mb-0 flex-1">
-                  <h3 className="font-medium text-text-primary text-lg md:text-2xl">{item.nombre}</h3>
-                  <p className="text-accent text-sm md:text-base mt-1">${item.precio.toLocaleString()} c/u</p>
+              <div key={item.id} className="bg-surface border border-surface-border rounded-2xl p-4 md:p-8 hover:shadow-sm transition-all duration-300 hover:scale-[1.02]">
+                {/* Top Section: Product name and unit price */}
+                <div className="flex justify-between items-center mb-3 md:mb-4">
+                  <h3 className="font-medium text-text-primary text-lg md:text-2xl flex-1 pr-2">{item.nombre}</h3>
+                  <p className="text-accent text-sm md:text-base font-medium">${item.precio.toLocaleString()} c/u</p>
                 </div>
-                <div className="flex items-center gap-3 w-full md:w-auto justify-between md:justify-end">
-                  <div className="flex items-center gap-2 bg-background border border-surface-border rounded-xl p-2 min-h-[44px]">
+                {/* Bottom Section: Quantity control and subtotal */}
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-2">
+                    {/* Quantity Control */}
+                    <div className="flex items-center bg-background border border-surface-border rounded-lg min-h-[44px]">
+                      <button
+                        onClick={() => handleQuantityChange(item.nombre, item.quantity - 1)}
+                        className="w-10 h-10 flex items-center justify-center text-text-primary hover:text-accent hover:bg-accent/10 transition-colors duration-300 rounded-l-lg"
+                        aria-label={`Disminuir cantidad de ${item.nombre}`}
+                      >
+                        <Minus className="w-4 h-4" />
+                      </button>
+                      <span className="font-semibold text-lg px-3 min-w-[2.5rem] text-center">{item.quantity}</span>
+                      <button
+                        onClick={() => handleQuantityChange(item.nombre, item.quantity + 1)}
+                        className="w-10 h-10 flex items-center justify-center text-text-primary hover:text-accent hover:bg-accent/10 transition-colors duration-300 rounded-r-lg"
+                        aria-label={`Aumentar cantidad de ${item.nombre}`}
+                      >
+                        <Plus className="w-4 h-4" />
+                      </button>
+                    </div>
+                    {/* Remove Action */}
                     <button
-                      onClick={() => handleQuantityChange(item.nombre, item.quantity - 1)}
-                      className="w-8 h-8 flex items-center justify-center text-text-primary hover:text-accent transition-colors duration-300 min-h-[44px] min-w-[44px]"
-                      aria-label={`Disminuir cantidad de ${item.nombre}`}
+                      onClick={() => handleRemoveItem(item.nombre)}
+                      className="text-text-muted hover:text-red-500 transition-colors duration-300 p-2"
+                      aria-label={`Eliminar ${item.nombre} del carrito`}
                     >
-                      <Minus className="w-4 h-4" />
-                    </button>
-                    <span className="font-medium text-base md:text-lg min-w-[2rem] text-center">{item.quantity}</span>
-                    <button
-                      onClick={() => handleQuantityChange(item.nombre, item.quantity + 1)}
-                      className="w-8 h-8 flex items-center justify-center text-text-primary hover:text-accent transition-colors duration-300 min-h-[44px] min-w-[44px]"
-                      aria-label={`Aumentar cantidad de ${item.nombre}`}
-                    >
-                      <Plus className="w-4 h-4" />
+                      🗑️
                     </button>
                   </div>
-                  <span className="font-medium text-accent text-lg md:text-2xl ml-2">${(item.precio * item.quantity).toLocaleString()}</span>
-                  <button
-                    onClick={() => handleRemoveItem(item.nombre)}
-                    className="text-text-muted hover:text-red-500 transition-colors duration-300 text-sm ml-2 min-h-[44px] px-3"
-                    aria-label={`Eliminar ${item.nombre} del carrito`}
-                  >
-                    Eliminar
-                  </button>
+                  {/* Product Subtotal */}
+                  <span className="font-bold text-accent text-xl md:text-2xl">${(item.precio * item.quantity).toLocaleString()}</span>
                 </div>
               </div>
             ))}
@@ -109,8 +116,8 @@ const CartPage = () => {
           </div>
 
           {/* Customer Form */}
-          <div className="bg-surface border border-surface-border rounded-2xl p-8 md:p-10 mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl font-serif font-medium mb-8 text-text-primary">Datos del Cliente</h2>
+          <div className="bg-surface border border-surface-border rounded-2xl p-6 md:p-10 mb-12 md:mb-16 opacity-80 md:opacity-100">
+            <h2 className="text-xl md:text-4xl font-serif font-medium mb-6 md:mb-8 text-text-secondary md:text-text-primary">Datos del Cliente</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
               <input
                 type="text"
@@ -163,7 +170,19 @@ const CartPage = () => {
           </div>
 
           {/* Actions */}
-          <div className="flex flex-col md:flex-row justify-between gap-6">
+          <div className="md:hidden fixed bottom-0 left-0 right-0 bg-surface border-t border-border-subtle p-4 z-50">
+            <button
+              onClick={handleSubmit}
+              disabled={!customerInfo.name || !customerInfo.phone || !customerInfo.address}
+              className="w-full bg-accent text-surface py-4 rounded-xl hover:bg-accent-hover transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-bold text-lg min-h-[56px]"
+              aria-label="Enviar pedido por WhatsApp"
+            >
+              Enviar Pedido por WhatsApp
+            </button>
+          </div>
+
+          {/* Desktop Actions */}
+          <div className="hidden md:flex md:flex-row justify-between gap-6">
             <button
               onClick={clearCart}
               className="bg-surface border border-surface-border text-text-primary px-8 py-4 rounded-xl hover:bg-red-50 hover:border-red-200 hover:text-red-600 transition-colors duration-300 font-medium"
@@ -180,6 +199,9 @@ const CartPage = () => {
               Enviar Pedido por WhatsApp
             </button>
           </div>
+
+          {/* Mobile Spacer */}
+          <div className="md:hidden h-20"></div>
         </>
       )}
     </div>
