@@ -47,8 +47,8 @@ const CartPage = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 md:px-8 md:py-16">
-      <h1 className="text-3xl md:text-5xl font-serif font-medium text-center text-text-primary mb-8 md:mb-12">Tu Carrito</h1>
+    <div className="container mx-auto px-4 py-6 md:px-8 md:py-16">
+      <h1 className="text-2xl md:text-5xl font-serif font-medium text-center text-text-primary mb-6 md:mb-12">Tu Carrito</h1>
 
       {/* Toast Notification */}
       {toastMessage && (
@@ -62,46 +62,46 @@ const CartPage = () => {
       ) : (
         <>
           {/* Cart Items */}
-          <div className="grid gap-4 md:gap-8 mb-6 md:mb-16">
+          <div className="grid gap-3 md:gap-8 mb-4 md:mb-16">
             {safeItems.map((item) => (
-              <div key={item.id} className="bg-surface border border-surface-border rounded-2xl p-4 md:p-8 hover:shadow-sm transition-all duration-300 hover:scale-[1.02]">
+              <div key={item.id} className="bg-surface border border-surface-border rounded-2xl p-3 md:p-8 hover:shadow-sm transition-all duration-300 hover:scale-[1.02]">
                 {/* Top Section: Product name and unit price */}
-                <div className="flex justify-between items-center mb-3 md:mb-4">
-                  <h3 className="font-medium text-text-primary text-lg md:text-2xl flex-1 pr-2">{item.nombre}</h3>
+                <div className="flex justify-between items-center mb-2 md:mb-4">
+                  <h3 className="font-medium text-text-primary text-base md:text-2xl flex-1 pr-2">{item.nombre}</h3>
                   <p className="text-accent text-sm md:text-base font-medium">${item.precio.toLocaleString()} c/u</p>
                 </div>
                 {/* Bottom Section: Quantity control and subtotal */}
                 <div className="flex justify-between items-center">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1 md:gap-2">
                     {/* Quantity Control */}
-                    <div className="flex items-center bg-background border border-surface-border rounded-lg min-h-[44px]">
+                    <div className="flex items-center bg-background border border-surface-border rounded-lg min-h-[40px] md:min-h-[44px]">
                       <button
                         onClick={() => handleQuantityChange(item.nombre, item.quantity - 1)}
-                        className="w-10 h-10 flex items-center justify-center text-text-primary hover:text-accent hover:bg-accent/10 transition-colors duration-300 rounded-l-lg"
+                        className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center text-text-primary hover:text-accent hover:bg-accent/10 transition-colors duration-300 rounded-l-lg"
                         aria-label={`Disminuir cantidad de ${item.nombre}`}
                       >
-                        <Minus className="w-4 h-4" />
+                        <Minus className="w-3 h-3 md:w-4 md:h-4" />
                       </button>
-                      <span className="font-semibold text-lg px-3 min-w-[2.5rem] text-center">{item.quantity}</span>
+                      <span className="font-semibold text-base md:text-lg px-2 md:px-3 min-w-[2rem] md:min-w-[2.5rem] text-center">{item.quantity}</span>
                       <button
                         onClick={() => handleQuantityChange(item.nombre, item.quantity + 1)}
-                        className="w-10 h-10 flex items-center justify-center text-text-primary hover:text-accent hover:bg-accent/10 transition-colors duration-300 rounded-r-lg"
+                        className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center text-text-primary hover:text-accent hover:bg-accent/10 transition-colors duration-300 rounded-r-lg"
                         aria-label={`Aumentar cantidad de ${item.nombre}`}
                       >
-                        <Plus className="w-4 h-4" />
+                        <Plus className="w-3 h-3 md:w-4 md:h-4" />
                       </button>
                     </div>
                     {/* Remove Action */}
                     <button
                       onClick={() => handleRemoveItem(item.nombre)}
-                      className="text-text-muted hover:text-red-500 transition-colors duration-300 p-2"
+                      className="text-text-muted hover:text-red-500 hover:bg-red-50 transition-colors duration-300 p-2 rounded-lg min-h-[40px] min-w-[40px] flex items-center justify-center"
                       aria-label={`Eliminar ${item.nombre} del carrito`}
                     >
                       🗑️
                     </button>
                   </div>
                   {/* Product Subtotal */}
-                  <span className="font-bold text-accent text-xl md:text-2xl">${(item.precio * item.quantity).toLocaleString()}</span>
+                  <span className="font-bold text-accent text-lg md:text-2xl">${(item.precio * item.quantity).toLocaleString()}</span>
                 </div>
               </div>
             ))}
@@ -170,11 +170,11 @@ const CartPage = () => {
           </div>
 
           {/* Actions */}
-          <div className="md:hidden fixed bottom-0 left-0 right-0 bg-surface border-t border-border-subtle p-4 z-50">
+          <div className="md:hidden fixed bottom-0 left-0 right-0 bg-surface/95 backdrop-blur-sm border-t border-border-subtle p-4 z-40" style={{ marginBottom: '72px' }}>
             <button
               onClick={handleSubmit}
               disabled={!customerInfo.name || !customerInfo.phone || !customerInfo.address}
-              className="w-full bg-accent text-surface py-4 rounded-xl hover:bg-accent-hover transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-bold text-lg min-h-[56px]"
+              className="w-4/5 mx-auto bg-accent/90 text-surface py-3 rounded-xl hover:bg-accent transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-semibold text-base min-h-[48px] block"
               aria-label="Enviar pedido por WhatsApp"
             >
               Enviar Pedido por WhatsApp
