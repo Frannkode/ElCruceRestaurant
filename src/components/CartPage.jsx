@@ -1,0 +1,189 @@
+import { useState, useEffect } from 'react';
+import useCartStore from '../stores/cartStore';
+import { Trash2, Minus, Plus } from 'lucide-react';
+
+const CartPage = () => {
+  const cart = useCartStore((state) => state.cart);
+  const updateQuantity = useCartStore((state) => state.updateQuantity);
+  const removeItem = useCartStore((state) => state.removeItem);
+  const clearCart = useCartStore((state) => state.clearCart);
+  const safeItems = Array.isArray(cart) ? cart : [];
+  const total = safeItems.reduce((sum, item) => sum + (item.precio * item.quantity), 0);
+  const [customerInfo, setCustomerInfo] = useState({
+    name: '',
+    address: '',
+    phone: '',
+    observations: '',
+    delivery: false
+  });
+  const [toastMessage, setToastMessage] = useState('');
+  const [toastType, setToastType] = useState('success'); // 'success' or 'error'
+
+  // Scroll to top when component mounts (navigating to cart)
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handleQuantityChange = (itemNombre, newQuantity) => {
+    if (newQuantity <= 0) {
+      removeItem(itemNombre);
+    } else {
+      updateQuantity(itemNombre, newQuantity);
+    }
+  };
+
+  const handleRemoveItem = (itemNombre) => {
+    removeItem(itemNombre);
+    setToastMessage(`${itemNombre} eliminado del carrito`);
+    setToastType('error');
+    setTimeout(() => setToastMessage(''), 3000);
+  };
+
+  const handleSubmit = () => {
+    const message = `Hola! Quiero hacer un pedido:\n\n${safeItems.map(item => `${item.nombre} x${item.quantity} - $${(item.precio * item.quantity).toLocaleString()}`).join('\n')}\n\nTotal: $${total.toLocaleString()}\n\nCliente: ${customerInfo.name}\nDirección: ${customerInfo.address}\nTeléfono: ${customerInfo.phone}\nObservaciones: ${customerInfo.observations}\nTipo: ${customerInfo.delivery ? 'Delivery' : 'Retiro en local'}`;
+
+    const whatsappUrl = `https://wa.me/5493482123456?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
+  return (
+    <div className="container mx-auto px-4 py-8 md:px-8 md:py-16">
+      <h1 className="text-3xl md:text-5xl font-serif font-medium text-center text-text-primary mb-8 md:mb-12">Tu Carrito</h1>
+
+      {/* Toast Notification */}
+      {toastMessage && (
+        <div role="status" aria-live="polite" aria-atomic="true" className={`toast fixed top-4 right-4 px-4 py-2 rounded-xl shadow-lg flex items-center space-x-2 z-60 ${toastType === 'success' ? 'bg-accent text-surface' : 'bg-red-500 text-white'}`}>
+          <span>{toastMessage}</span>
+        </div>
+      )}
+
+      {safeItems.length === 0 ? (
+        <p className="text-center text-text-secondary text-base md:text-xl">Tu carrito está vacío</p>
+      ) : (
+        <>
+          {/* Cart Items */}
+          <div className="grid gap-4 md:gap-8 mb-8 md:mb-16">
+            {safeItems.map((item) => (
+              <div key={item.id} className="bg-surface border border-surface-border rounded-2xl p-4 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center hover:shadow-sm transition-all duration-300 hover:scale-[1.02]">
+                <div className="mb-4 md:mb-0 flex-1">
+                  <h3 className="font-medium text-text-primary text-lg md:text-2xl">{item.nombre}</h3>
+                  <p className="text-accent text-sm md:text-base mt-1">${item.precio.toLocaleString()} c/u</p>
+                </div>
+                <div className="flex items-center gap-3 w-full md:w-auto justify-between md:justify-end">
+                  <div className="flex items-center gap-2 bg-background border border-surface-border rounded-xl p-2 min-h-[44px]">
+                    <button
+                      onClick={() => handleQuantityChange(item.nombre, item.quantity - 1)}
+                      className="w-8 h-8 flex items-center justify-center text-text-primary hover:text-accent transition-colors duration-300 min-h-[44px] min-w-[44px]"
+                      aria-label={`Disminuir cantidad de ${item.nombre}`}
+                    >
+                      <Minus className="w-4 h-4" />
+                    </button>
+                    <span className="font-medium text-base md:text-lg min-w-[2rem] text-center">{item.quantity}</span>
+                    <button
+                      onClick={() => handleQuantityChange(item.nombre, item.quantity + 1)}
+                      className="w-8 h-8 flex items-center justify-center text-text-primary hover:text-accent transition-colors duration-300 min-h-[44px] min-w-[44px]"
+                      aria-label={`Aumentar cantidad de ${item.nombre}`}
+                    >
+                      <Plus className="w-4 h-4" />
+                    </button>
+                  </div>
+                  <span className="font-medium text-accent text-lg md:text-2xl ml-2">${(item.precio * item.quantity).toLocaleString()}</span>
+                  <button
+                    onClick={() => handleRemoveItem(item.nombre)}
+                    className="text-text-muted hover:text-red-500 transition-colors duration-300 text-sm ml-2 min-h-[44px] px-3"
+                    aria-label={`Eliminar ${item.nombre} del carrito`}
+                  >
+                    Eliminar
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Total */}
+          <div className="bg-surface border border-surface-border rounded-2xl p-6 md:p-8 mb-12 md:mb-16">
+            <div className="flex justify-between items-center text-2xl md:text-3xl font-medium">
+              <span className="text-text-primary">Total:</span>
+              <span className="text-accent">${total.toLocaleString()}</span>
+            </div>
+          </div>
+
+          {/* Customer Form */}
+          <div className="bg-surface border border-surface-border rounded-2xl p-8 md:p-10 mb-12 md:mb-16">
+            <h2 className="text-3xl md:text-4xl font-serif font-medium mb-8 text-text-primary">Datos del Cliente</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+              <input
+                type="text"
+                placeholder="Nombre completo"
+                value={customerInfo.name}
+                onChange={(e) => setCustomerInfo({...customerInfo, name: e.target.value})}
+                className="border border-surface-border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent transition-colors duration-300 bg-background"
+                required
+                aria-label="Nombre completo"
+              />
+              <input
+                type="tel"
+                placeholder="Teléfono"
+                value={customerInfo.phone}
+                onChange={(e) => setCustomerInfo({...customerInfo, phone: e.target.value})}
+                className="border border-surface-border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent transition-colors duration-300 bg-background"
+                required
+                aria-label="Teléfono"
+              />
+              <input
+                type="text"
+                placeholder="Dirección"
+                value={customerInfo.address}
+                onChange={(e) => setCustomerInfo({...customerInfo, address: e.target.value})}
+                className="border border-surface-border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent md:col-span-2 transition-colors duration-300 bg-background"
+                required
+                aria-label="Dirección"
+              />
+              <textarea
+                placeholder="Observaciones (opcional)"
+                value={customerInfo.observations}
+                onChange={(e) => setCustomerInfo({...customerInfo, observations: e.target.value})}
+                className="border border-surface-border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent md:col-span-2 transition-colors duration-300 bg-background"
+                rows="3"
+                aria-label="Observaciones"
+              />
+              <div className="md:col-span-2">
+                <label className="flex items-center text-sm md:text-base text-text-secondary">
+                  <input
+                    type="checkbox"
+                    checked={customerInfo.delivery}
+                    onChange={(e) => setCustomerInfo({...customerInfo, delivery: e.target.checked})}
+                    className="mr-3 w-4 h-4"
+                    aria-label="Delivery"
+                  />
+                  Delivery (costo adicional según distancia)
+                </label>
+              </div>
+            </div>
+          </div>
+
+          {/* Actions */}
+          <div className="flex flex-col md:flex-row justify-between gap-6">
+            <button
+              onClick={clearCart}
+              className="bg-surface border border-surface-border text-text-primary px-8 py-4 rounded-xl hover:bg-red-50 hover:border-red-200 hover:text-red-600 transition-colors duration-300 font-medium"
+              aria-label="Vaciar carrito"
+            >
+              Vaciar Carrito
+            </button>
+            <button
+              onClick={handleSubmit}
+              disabled={!customerInfo.name || !customerInfo.phone || !customerInfo.address}
+              className="bg-accent text-surface px-8 py-4 rounded-xl hover:bg-accent-hover transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+              aria-label="Enviar pedido por WhatsApp"
+            >
+              Enviar Pedido por WhatsApp
+            </button>
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
+export default CartPage;
