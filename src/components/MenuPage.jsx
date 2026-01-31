@@ -199,18 +199,18 @@ const MenuPage = () => {
           selectedCategory === category && (
             <div key={category}>
               <div className="border-t border-border-accent mb-8"></div>
-              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 {menuData[selectedCategory]?.map((item, index) => (
-                  <div key={index} className="bg-surface border border-surface-border rounded-2xl p-4 md:p-8 hover:shadow-sm transition-all duration-300 hover:scale-[1.02]">
-                    <h3 className="text-lg md:text-2xl font-serif font-medium mb-2 md:mb-3 text-text-primary">{item.nombre}</h3>
+                  <div key={index} className="bg-surface border border-surface-border rounded-2xl p-6 md:p-8 hover:shadow-sm transition-all duration-300 hover:scale-[1.02]">
+                    <h3 className="text-xl md:text-2xl font-serif font-semibold mb-3 md:mb-4 text-text-primary leading-tight">{item.nombre}</h3>
                     {item.descripcion && (
-                      <p className="text-text-secondary mb-4 md:mb-6 text-sm leading-relaxed">{item.descripcion}</p>
+                      <p className="text-text-secondary mb-6 md:mb-8 text-sm leading-relaxed line-clamp-2 md:line-clamp-none">{item.descripcion}</p>
                     )}
-                    <div className="flex justify-between items-center">
-                      <span className="text-lg md:text-2xl font-medium text-accent">${item.precio.toLocaleString()}</span>
+                    <div className="flex justify-between items-center pt-4 border-t border-border-subtle">
+                      <span className="text-xl md:text-2xl font-bold text-accent">${item.precio.toLocaleString()}</span>
                       <button
                         onClick={() => handleAddToCart(item)}
-                        className="bg-accent text-surface px-4 py-2 md:px-6 md:py-3 rounded-xl hover:bg-accent-hover transition-colors duration-300 font-medium min-h-[44px] text-sm md:text-base"
+                        className="bg-accent text-surface px-6 py-3 rounded-xl hover:bg-accent-hover transition-all duration-300 font-semibold min-h-[48px] text-base shadow-sm hover:shadow-md"
                         aria-label={`Agregar ${item.nombre} al carrito`}
                       >
                         Agregar
