@@ -18,6 +18,8 @@ const CartPage = () => {
   });
   const [toastMessage, setToastMessage] = useState('');
   const [toastType, setToastType] = useState('success'); // 'success' or 'error'
+  const [validationErrors, setValidationErrors] = useState({});
+  const [showValidationMessage, setShowValidationMessage] = useState(false);
 
   // Scroll to top when component mounts (navigating to cart)
   useEffect(() => {
@@ -40,6 +42,31 @@ const CartPage = () => {
   };
 
   const handleSubmit = () => {
+    // Validate required fields
+    const errors = {};
+    if (!customerInfo.name.trim()) errors.name = 'Este campo es obligatorio';
+    if (!customerInfo.phone.trim()) errors.phone = 'Este campo es obligatorio';
+    if (!customerInfo.address.trim()) errors.address = 'Este campo es obligatorio';
+
+    setValidationErrors(errors);
+
+    if (Object.keys(errors).length > 0) {
+      // Show validation message and scroll to form
+      setShowValidationMessage(true);
+      setTimeout(() => setShowValidationMessage(false), 5000);
+
+      // Scroll to form section
+      const formElement = document.querySelector('[data-form-section]');
+      if (formElement) {
+        formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      return;
+    }
+
+    // Clear any previous validation state
+    setValidationErrors({});
+    setShowValidationMessage(false);
+
     const message = `Hola! Quiero hacer un pedido:\n\n${safeItems.map(item => `${item.nombre} x${item.quantity} - $${(item.precio * item.quantity).toLocaleString()}`).join('\n')}\n\nTotal: $${total.toLocaleString()}\n\nCliente: ${customerInfo.name}\nDirección: ${customerInfo.address}\nTeléfono: ${customerInfo.phone}\nObservaciones: ${customerInfo.observations}\nTipo: ${customerInfo.delivery ? 'Delivery' : 'Retiro en local'}`;
 
     const whatsappUrl = `https://wa.me/5493482123456?text=${encodeURIComponent(message)}`;
@@ -116,44 +143,75 @@ const CartPage = () => {
           </div>
 
           {/* Customer Form */}
-          <div className="bg-surface border border-surface-border rounded-2xl p-6 md:p-10 mb-12 md:mb-16 opacity-80 md:opacity-100">
+          <div data-form-section className="bg-surface border border-surface-border rounded-2xl p-6 md:p-10 mb-12 md:mb-16 opacity-80 md:opacity-100">
             <h2 className="text-xl md:text-4xl font-serif font-medium mb-6 md:mb-8 text-text-secondary md:text-text-primary">Datos del Cliente</h2>
+
+            {/* Validation Message */}
+            {showValidationMessage && (
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm md:text-base">
+                Por favor complete sus datos de contacto antes de enviar el pedido.
+              </div>
+            )}
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-              <input
-                type="text"
-                placeholder="Nombre completo"
-                value={customerInfo.name}
-                onChange={(e) => setCustomerInfo({...customerInfo, name: e.target.value})}
-                className="border border-surface-border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent transition-colors duration-300 bg-background"
-                required
-                aria-label="Nombre completo"
-              />
-              <input
-                type="tel"
-                placeholder="Teléfono"
-                value={customerInfo.phone}
-                onChange={(e) => setCustomerInfo({...customerInfo, phone: e.target.value})}
-                className="border border-surface-border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent transition-colors duration-300 bg-background"
-                required
-                aria-label="Teléfono"
-              />
-              <input
-                type="text"
-                placeholder="Dirección"
-                value={customerInfo.address}
-                onChange={(e) => setCustomerInfo({...customerInfo, address: e.target.value})}
-                className="border border-surface-border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent md:col-span-2 transition-colors duration-300 bg-background"
-                required
-                aria-label="Dirección"
-              />
-              <textarea
-                placeholder="Observaciones (opcional)"
-                value={customerInfo.observations}
-                onChange={(e) => setCustomerInfo({...customerInfo, observations: e.target.value})}
-                className="border border-surface-border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent md:col-span-2 transition-colors duration-300 bg-background"
-                rows="3"
-                aria-label="Observaciones"
-              />
+              <div>
+                <input
+                  type="text"
+                  placeholder="Nombre completo"
+                  value={customerInfo.name}
+                  onChange={(e) => setCustomerInfo({...customerInfo, name: e.target.value})}
+                  className={`border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 transition-colors duration-300 bg-background ${
+                    validationErrors.name ? 'border-red-500 focus:ring-red-500' : 'border-surface-border focus:ring-accent'
+                  }`}
+                  required
+                  aria-label="Nombre completo"
+                />
+                {validationErrors.name && (
+                  <p className="text-red-600 text-sm mt-1">{validationErrors.name}</p>
+                )}
+              </div>
+              <div>
+                <input
+                  type="tel"
+                  placeholder="Teléfono"
+                  value={customerInfo.phone}
+                  onChange={(e) => setCustomerInfo({...customerInfo, phone: e.target.value})}
+                  className={`border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 transition-colors duration-300 bg-background ${
+                    validationErrors.phone ? 'border-red-500 focus:ring-red-500' : 'border-surface-border focus:ring-accent'
+                  }`}
+                  required
+                  aria-label="Teléfono"
+                />
+                {validationErrors.phone && (
+                  <p className="text-red-600 text-sm mt-1">{validationErrors.phone}</p>
+                )}
+              </div>
+              <div className="md:col-span-2">
+                <input
+                  type="text"
+                  placeholder="Dirección"
+                  value={customerInfo.address}
+                  onChange={(e) => setCustomerInfo({...customerInfo, address: e.target.value})}
+                  className={`border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 transition-colors duration-300 bg-background ${
+                    validationErrors.address ? 'border-red-500 focus:ring-red-500' : 'border-surface-border focus:ring-accent'
+                  }`}
+                  required
+                  aria-label="Dirección"
+                />
+                {validationErrors.address && (
+                  <p className="text-red-600 text-sm mt-1">{validationErrors.address}</p>
+                )}
+              </div>
+              <div className="md:col-span-2">
+                <textarea
+                  placeholder="Observaciones (opcional)"
+                  value={customerInfo.observations}
+                  onChange={(e) => setCustomerInfo({...customerInfo, observations: e.target.value})}
+                  className="border border-surface-border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent transition-colors duration-300 bg-background"
+                  rows="3"
+                  aria-label="Observaciones"
+                />
+              </div>
               <div className="md:col-span-2">
                 <label className="flex items-center text-sm md:text-base text-text-secondary">
                   <input
