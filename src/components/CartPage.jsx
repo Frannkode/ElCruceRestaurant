@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import useCartStore from '../stores/cartStore';
-import { Trash2, Minus, Plus } from 'lucide-react';
+import { Trash2, Minus, Plus, X } from 'lucide-react';
 
 const CartPage = () => {
   const cart = useCartStore((state) => state.cart);
@@ -8,14 +8,16 @@ const CartPage = () => {
   const removeItem = useCartStore((state) => state.removeItem);
   const clearCart = useCartStore((state) => state.clearCart);
   const safeItems = Array.isArray(cart) ? cart : [];
-  const total = safeItems.reduce((sum, item) => sum + (item.precio * item.quantity), 0);
+  const deliveryFee = 200;
   const [customerInfo, setCustomerInfo] = useState({
     name: '',
     address: '',
     phone: '',
     observations: '',
-    delivery: false
+    deliveryMethod: 'pickup' // 'pickup' or 'delivery'
   });
+  const subtotal = safeItems.reduce((sum, item) => sum + (item.precio * item.quantity), 0);
+  const total = subtotal + (customerInfo.deliveryMethod === 'delivery' ? deliveryFee : 0);
   const [toastMessage, setToastMessage] = useState('');
   const [toastType, setToastType] = useState('success'); // 'success' or 'error'
   const [validationErrors, setValidationErrors] = useState({});
@@ -46,7 +48,7 @@ const CartPage = () => {
     const errors = {};
     if (!customerInfo.name.trim()) errors.name = 'Este campo es obligatorio';
     if (!customerInfo.phone.trim()) errors.phone = 'Este campo es obligatorio';
-    if (!customerInfo.address.trim()) errors.address = 'Este campo es obligatorio';
+    if (customerInfo.deliveryMethod === 'delivery' && !customerInfo.address.trim()) errors.address = 'Este campo es obligatorio';
 
     setValidationErrors(errors);
 
@@ -67,7 +69,7 @@ const CartPage = () => {
     setValidationErrors({});
     setShowValidationMessage(false);
 
-    const message = `¡Hola! 👋 Me gustaría hacer un pedido:\n\n🧾 *Detalles del Pedido:*\n${safeItems.map(item => `🍔 ${item.nombre} x${item.quantity} - $${(item.precio * item.quantity).toLocaleString()}`).join('\n')}\n\n💰 *Total: $${total.toLocaleString()}*\n\n👤 *Información del Cliente:*\n📍 Dirección: ${customerInfo.address}\n📞 Teléfono: ${customerInfo.phone}\n${customerInfo.observations ? `📝 Observaciones: ${customerInfo.observations}\n` : ''}Tipo: ${customerInfo.delivery ? '🚚 Delivery' : '🏪 Retiro en local'}\n\n¡Gracias por tu pedido! ✅`;
+    const message = `¡Hola! 👋 Me gustaría hacer un pedido:\n\n🧾 *Detalles del Pedido:*\n${safeItems.map(item => `${item.nombre} x${item.quantity} - $${(item.precio * item.quantity).toLocaleString()}`).join('\n')}\n\n💰 *Total: $${total.toLocaleString()}${customerInfo.deliveryMethod === 'delivery' ? ' (+ Delivery)' : ''}*\n\n👤 *Información del Cliente:*\n${customerInfo.deliveryMethod === 'delivery' ? `📍 Dirección: ${customerInfo.address}\n` : ''}📞 Teléfono: ${customerInfo.phone}\n${customerInfo.observations ? `📝 Observaciones: ${customerInfo.observations}\n` : ''}${customerInfo.deliveryMethod === 'delivery' ? '🚚 Delivery' : '🏪 Retiro en local'}`;
 
     const whatsappUrl = `https://wa.me/5493482577245?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
@@ -121,10 +123,10 @@ const CartPage = () => {
                     {/* Remove Action */}
                     <button
                       onClick={() => handleRemoveItem(item.nombre)}
-                      className="text-text-muted hover:text-red-500 hover:bg-red-50 transition-colors duration-300 p-2 rounded-lg min-h-[40px] min-w-[40px] flex items-center justify-center"
+                      className="text-red-400 hover:text-red-600 hover:bg-red-50 active:bg-red-100 transition-colors duration-200 p-2 rounded-lg min-h-[40px] min-w-[40px] flex items-center justify-center"
                       aria-label={`Eliminar ${item.nombre} del carrito`}
                     >
-                      🗑️
+                      <X className="w-4 h-4" />
                     </button>
                   </div>
                   {/* Product Subtotal */}
@@ -136,9 +138,21 @@ const CartPage = () => {
 
           {/* Total */}
           <div className="bg-surface border border-surface-border rounded-2xl p-6 md:p-8 mb-12 md:mb-16">
-            <div className="flex justify-between items-center text-2xl md:text-3xl font-medium">
-              <span className="text-text-primary">Total:</span>
-              <span className="text-accent">${total.toLocaleString()}</span>
+            <div className="space-y-2">
+              <div className="flex justify-between items-center text-lg md:text-xl font-medium">
+                <span className="text-text-primary">Subtotal:</span>
+                <span className="text-text-primary">${subtotal.toLocaleString()}</span>
+              </div>
+              {customerInfo.deliveryMethod === 'delivery' && (
+                <div className="flex justify-between items-center text-lg md:text-xl font-medium">
+                  <span className="text-text-primary">Delivery:</span>
+                  <span className="text-text-primary">${deliveryFee.toLocaleString()}</span>
+                </div>
+              )}
+              <div className="flex justify-between items-center text-2xl md:text-3xl font-medium border-t border-surface-border pt-2">
+                <span className="text-text-primary">Total:</span>
+                <span className="text-accent">${total.toLocaleString()}</span>
+              </div>
             </div>
           </div>
 
@@ -186,22 +200,24 @@ const CartPage = () => {
                   <p className="text-red-600 text-sm mt-1">{validationErrors.phone}</p>
                 )}
               </div>
-              <div className="md:col-span-2">
-                <input
-                  type="text"
-                  placeholder="Dirección"
-                  value={customerInfo.address}
-                  onChange={(e) => setCustomerInfo({...customerInfo, address: e.target.value})}
-                  className={`border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 transition-colors duration-300 bg-background ${
-                    validationErrors.address ? 'border-red-500 focus:ring-red-500' : 'border-surface-border focus:ring-accent'
-                  }`}
-                  required
-                  aria-label="Dirección"
-                />
-                {validationErrors.address && (
-                  <p className="text-red-600 text-sm mt-1">{validationErrors.address}</p>
-                )}
-              </div>
+              {customerInfo.deliveryMethod === 'delivery' && (
+                <div className="md:col-span-2">
+                  <input
+                    type="text"
+                    placeholder="Dirección"
+                    value={customerInfo.address}
+                    onChange={(e) => setCustomerInfo({...customerInfo, address: e.target.value})}
+                    className={`border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 transition-colors duration-300 bg-background ${
+                      validationErrors.address ? 'border-red-500 focus:ring-red-500' : 'border-surface-border focus:ring-accent'
+                    }`}
+                    required
+                    aria-label="Dirección"
+                  />
+                  {validationErrors.address && (
+                    <p className="text-red-600 text-sm mt-1">{validationErrors.address}</p>
+                  )}
+                </div>
+              )}
               <div className="md:col-span-2">
                 <textarea
                   placeholder="Observaciones (opcional)"
@@ -213,16 +229,33 @@ const CartPage = () => {
                 />
               </div>
               <div className="md:col-span-2">
-                <label className="flex items-center text-sm md:text-base text-text-secondary">
-                  <input
-                    type="checkbox"
-                    checked={customerInfo.delivery}
-                    onChange={(e) => setCustomerInfo({...customerInfo, delivery: e.target.checked})}
-                    className="mr-3 w-4 h-4"
+                <h3 className="text-lg md:text-xl font-medium text-text-primary mb-4">Método de Entrega</h3>
+                <div className="flex gap-4">
+                  <button
+                    type="button"
+                    onClick={() => setCustomerInfo({...customerInfo, deliveryMethod: 'pickup'})}
+                    className={`flex-1 py-3 px-4 rounded-xl border-2 font-medium transition-all duration-300 ${
+                      customerInfo.deliveryMethod === 'pickup'
+                        ? 'border-accent bg-accent text-surface'
+                        : 'border-surface-border bg-background text-text-primary hover:border-accent/50'
+                    }`}
+                    aria-label="Retiro en local"
+                  >
+                    🏪 Retiro en Local
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setCustomerInfo({...customerInfo, deliveryMethod: 'delivery'})}
+                    className={`flex-1 py-3 px-4 rounded-xl border-2 font-medium transition-all duration-300 ${
+                      customerInfo.deliveryMethod === 'delivery'
+                        ? 'border-accent bg-accent text-surface'
+                        : 'border-surface-border bg-background text-text-primary hover:border-accent/50'
+                    }`}
                     aria-label="Delivery"
-                  />
-                  Delivery (costo adicional según distancia)
-                </label>
+                  >
+                    🚚 Envio
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -231,8 +264,7 @@ const CartPage = () => {
           <div className="md:hidden fixed bottom-0 left-0 right-0 bg-surface/95 backdrop-blur-sm border-t border-border-subtle p-4 z-40" style={{ marginBottom: '72px' }}>
             <button
               onClick={handleSubmit}
-              disabled={!customerInfo.name || !customerInfo.phone || !customerInfo.address}
-              className="w-4/5 mx-auto bg-accent/90 text-surface py-3 rounded-xl hover:bg-accent transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-semibold text-base min-h-[48px] block"
+              className="w-4/5 mx-auto bg-accent/90 text-surface py-3 rounded-xl hover:bg-accent transition-colors duration-300 font-semibold text-base min-h-[48px] block"
               aria-label="Enviar pedido por WhatsApp"
             >
               Enviar Pedido por WhatsApp
@@ -250,8 +282,7 @@ const CartPage = () => {
             </button>
             <button
               onClick={handleSubmit}
-              disabled={!customerInfo.name || !customerInfo.phone || !customerInfo.address}
-              className="bg-accent text-surface px-8 py-4 rounded-xl hover:bg-accent-hover transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+              className="bg-accent text-surface px-8 py-4 rounded-xl hover:bg-accent-hover transition-colors duration-300 font-medium"
               aria-label="Enviar pedido por WhatsApp"
             >
               Enviar Pedido por WhatsApp
