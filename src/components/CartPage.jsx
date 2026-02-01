@@ -67,9 +67,9 @@ const CartPage = () => {
     setValidationErrors({});
     setShowValidationMessage(false);
 
-    const message = `Hola! Quiero hacer un pedido:\n\n${safeItems.map(item => `${item.nombre} x${item.quantity} - $${(item.precio * item.quantity).toLocaleString()}`).join('\n')}\n\nTotal: $${total.toLocaleString()}\n\nCliente: ${customerInfo.name}\nDirección: ${customerInfo.address}\nTeléfono: ${customerInfo.phone}\nObservaciones: ${customerInfo.observations}\nTipo: ${customerInfo.delivery ? 'Delivery' : 'Retiro en local'}`;
+    const message = `¡Hola! 👋 Me gustaría hacer un pedido:\n\n🧾 *Detalles del Pedido:*\n${safeItems.map(item => `🍔 ${item.nombre} x${item.quantity} - $${(item.precio * item.quantity).toLocaleString()}`).join('\n')}\n\n💰 *Total: $${total.toLocaleString()}*\n\n👤 *Información del Cliente:*\n📍 Dirección: ${customerInfo.address}\n📞 Teléfono: ${customerInfo.phone}\n${customerInfo.observations ? `📝 Observaciones: ${customerInfo.observations}\n` : ''}Tipo: ${customerInfo.delivery ? '🚚 Delivery' : '🏪 Retiro en local'}\n\n¡Gracias por tu pedido! ✅`;
 
-    const whatsappUrl = `https://wa.me/5493482123456?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/5493482577245?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 
