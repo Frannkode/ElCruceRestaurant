@@ -1,9 +1,16 @@
+import { useLocation } from 'react-router-dom';
+
 const WhatsAppButton = () => {
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+
   const handleClick = () => {
     const message = "Hola! Me gustaría hacer una consulta sobre Restaurant El Cruce.";
-    const whatsappUrl = `https://wa.me/5493482123456?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/5493482577245?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
+
+  if (!isHomePage) return null;
 
   return (
     <button
