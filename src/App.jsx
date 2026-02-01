@@ -7,6 +7,10 @@ import CartPage from './components/CartPage';
 import AdminPage from './components/AdminPage';
 import WhatsAppButton from './components/WhatsAppButton';
 
+/**
+ * Top-level application component that configures client-side routes and page layout.
+ * @returns {JSX.Element} The root JSX element containing the header, routed main content, footer, and WhatsApp button.
+ */
 function App() {
   return (
     <Router>
