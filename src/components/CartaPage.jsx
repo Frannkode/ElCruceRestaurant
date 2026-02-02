@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import { BiSolidDrink } from "react-icons/bi";
 import { menuData } from '../data/menu.js';
 import WhatsAppButton from './WhatsAppButton.jsx';
 import DeliveryButton from './DeliveryButton.jsx';
@@ -5,6 +7,30 @@ import DeliveryButton from './DeliveryButton.jsx';
 const CartaPage = () => {
   return (
     <div className="max-w-4xl mx-auto px-6 py-8 font-['Google_Sans'] cartapage">
+      {/* BOTÓN VOLVER */}
+      <Link
+        to="/bebidas"
+        className="fixed top-4 left-4 z-50 flex items-center"
+      >
+        {/* BOTÓN */}
+        <div
+          className="w-12 h-12 rounded-full bg-black text-white
+               flex items-center justify-center shadow-lg"
+        >
+          <BiSolidDrink size={22} />
+        </div>
+
+        {/* ALERTA SIEMPRE VISIBLE */}
+        <span
+          className="ml-3 px-3 py-1 rounded-full
+               bg-black text-white text-sm font-bold
+               whitespace-nowrap shadow-md"
+        >
+          Bebidas!
+        </span>
+      </Link>
+
+
       <style>{`
         .dotted-line {
           background-image: repeating-linear-gradient(to right, #000000 0, #000000 1px, transparent 1px, transparent 4px);
@@ -42,10 +68,11 @@ const CartaPage = () => {
           </div>
         </div>
       ))}
-      <WhatsAppButton />
-      <DeliveryButton />
+      <div className="flex justify-center space-x-4 mb-4">
+        <DeliveryButton />
+        <WhatsAppButton />
+      </div>
     </div>
   );
 };
-
 export default CartaPage;

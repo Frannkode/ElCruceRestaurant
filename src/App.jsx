@@ -6,7 +6,10 @@ import MenuPage from './components/MenuPage';
 import CartPage from './components/CartPage';
 import AdminPage from './components/AdminPage';
 import CartaPage from './components/CartaPage';
+import BebidaPage from './components/BebidaPage';
 import WhatsAppButton from './components/WhatsAppButton';
+import BebidasButton from './components/BebidasButton';
+import CartaButton from './components/CartaButton';
 
 function App() {
   return (
@@ -19,21 +22,23 @@ function App() {
 function AppContent() {
   const location = useLocation();
   const isCartaPage = location.pathname === '/carta';
+  const isBebidaPage = location.pathname === '/bebidas';
 
   return (
     <div className="min-h-screen flex flex-col">
-      {!isCartaPage && <Header />}
+      {!(isCartaPage || isBebidaPage) && <Header />}
       <main className="flex-grow">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/menu" element={<MenuPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/carta" element={<CartaPage />} />
+          <Route path="/bebidas" element={<BebidaPage />} />
           <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </main>
-      {!isCartaPage && <Footer />}
-      {!isCartaPage && <WhatsAppButton />}
+      {!(isCartaPage || isBebidaPage) && <Footer />}
+      {!(isCartaPage || isBebidaPage) && <WhatsAppButton />}
     </div>
   );
 }

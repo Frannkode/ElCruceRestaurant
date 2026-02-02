@@ -12,7 +12,7 @@ const Footer = () => {
           <div>
             <h4 className="text-base md:text-lg font-medium mb-4 text-text-primary">Contacto</h4>
             <p className="text-sm text-text-secondary">Dirección: Reconquista, Santa Fe, Argentina</p>
-            <p className="text-sm text-text-secondary">Teléfono: (03482) 123-4567</p>
+            <p className="text-sm text-text-secondary">Teléfono: (03482)577245</p>
             <p className="text-sm text-text-secondary">Email: info@restaurantelcruce.com</p>
           </div>
           <div>

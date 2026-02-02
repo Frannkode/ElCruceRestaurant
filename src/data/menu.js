@@ -254,3 +254,199 @@ export const menuData = {
     { "nombre": "wifi 20405060", "precio": "" }
   ]
 }
+
+export const bebidasData = {
+  categoriesOrder: [
+    "aguas_y_gaseosas",
+    "cervezas",
+    "tragos",
+    "otras_bebidas",
+    "vinos_blancos",
+    "vinos_tintos",
+    "espumantes"
+  ],
+
+  aguas_y_gaseosas: [
+    { nombre: "Agua mineral sin gas", precio: 3000 },
+    { nombre: "Soda Pent 500 cc", precio: 3000 },
+    { nombre: "Agua saborizada 500 cc", precio: 3500 },
+    { nombre: "Gaseosa 1 Lt", precio: 7500 },
+    { nombre: "Gaseosa Coca Cola 600 cc", precio: 4000 },
+    { nombre: "Gaseosa Pepsi / 7Up 350 cc", precio: 3000 },
+    { nombre: "Jarra de limonada", precio: 7000 }
+  ],
+
+  cervezas: [
+    { nombre: "Munich Beer 330 cc", precio: 3500 },
+    { nombre: "Corona 330 cc", precio: 4500 },
+    { nombre: "Corona 710 cc", precio: 8500 },
+    { nombre: "Patagonia Weisse 730 cc", precio: 8500 },
+    { nombre: "Patagonia Amber 730 cc", precio: 8500 },
+    { nombre: "Patagonia IPA 730 cc", precio: 8500 },
+    { nombre: "Quilmes Stout 970 cc", precio: 7000 },
+    { nombre: "Stella Artois 970 cc", precio: 9000 },
+    { nombre: "Quilmes Clásica 970 cc", precio: 7000 },
+    { nombre: "Quilmes Bajo Cero 970 cc", precio: 7000 },
+    { nombre: "Brahma 970 cc", precio: 7000 },
+    { nombre: "Andes Origen Roja", precio: 7500 },
+    { nombre: "Andes Origen Rubia", precio: 7500 },
+    { nombre: "Budweiser 970 cc", precio: 7500 }
+  ],
+
+  tragos: [
+    { nombre: "Gin Tonic", descripcion: "Tónica o pomelo", precio: 7000 },
+    { nombre: "Gancia (medida)", precio: 2000 },
+    { nombre: "Fernet con Coca", precio: 7000 },
+    { nombre: "Cynar", descripcion: "Naranja, pomelo, soda o tónica", precio: 6500 }
+  ],
+
+  otras_bebidas: [
+    { nombre: "Whisky Old Smuggler / Criadores", precio: 3500 },
+    { nombre: "Whisky Chivas Regal", precio: 10000 },
+    { nombre: "Whisky Johnnie Walker Red Label", precio: 9000 },
+    { nombre: "Terma / Amargo serrano 220 cc", precio: 2000 },
+    { nombre: "Té", precio: 2000 },
+    { nombre: "Café cápsula Cabrales chico", precio: 3000 },
+    { nombre: "Café cápsula Cabrales jarrita", precio: 3000 },
+    { nombre: "Adicional leche / cortado", precio: 500 }
+  ],
+
+  vinos_blancos: [
+    {
+      bodega: "Viña Las Perdices",
+      items: [
+        { nombre: "Partridge Dulce Natural", precio_3_4: 12000 },
+        { nombre: "Partridge Chardonnay", precio_3_4: 12000 },
+        { nombre: "Las Perdices Sauvignon Blanc", precio_3_8: 10000, precio_3_4: 16000 },
+        { nombre: "Las Perdices Torrontés Dulce", precio_3_4: 16000 },
+        { nombre: "Las Perdices Reserva Chardonnay", precio_3_4: 21000 }
+      ]
+    },
+    {
+      bodega: "Catena Zapata",
+      items: [
+        { nombre: "Álamos Sauvignon Blanc", precio_3_4: 18000 },
+        { nombre: "Álamos Moscatel de Alejandría Dulce", precio_3_4: 18000 }
+      ]
+    },
+    {
+      bodega: "Trivento",
+      items: [
+        { nombre: "Trivento Reserve White Malbec", precio_3_4: 16000 }
+      ]
+    },
+    {
+      bodega: "Etchart",
+      items: [
+        { nombre: "Etchart Privado Torrontés", precio_3_4: 9000 }
+      ]
+    },
+    {
+      bodega: "Familia Zuccardi",
+      items: [
+        { nombre: "Santa Julia Chenin Dulce", precio_3_4: 13000 }
+      ]
+    },
+    {
+      bodega: "Salentein",
+      items: [
+        { nombre: "Portillo Sauvignon Blanc", precio_3_4: 12000 },
+        { nombre: "Portillo Dulce Natural", precio_3_4: 12000 },
+        { nombre: "Salentein Reserva Sauvignon Blanc", precio_3_4: 20000 },
+        { nombre: "Salentein Reserva Syrah Rosado", precio_3_4: 20000 }
+      ]
+    },
+    {
+      bodega: "Terrazas de los Andes",
+      items: [
+        { nombre: "Terrazas Reserva Chardonnay", precio_3_4: 20000 }
+      ]
+    },
+    {
+      bodega: "Altos del Plata",
+      items: [
+        { nombre: "Altos del Plata Chardonnay", precio_3_4: 17500 }
+      ]
+    },
+    {
+      bodega: "33 Sur",
+      items: [
+        { nombre: "Latitud 33 Sauvignon Blanc", precio_3_4: 13000 }
+      ]
+    }
+  ],
+
+  vinos_tintos: [
+    {
+      bodega: "Viña Las Perdices",
+      items: [
+        { nombre: "Partridge Malbec", precio_3_8: 8000, precio_3_4: 12000 },
+        { nombre: "Las Perdices Cabernet Sauvignon", precio_3_4: 16000 },
+        { nombre: "Las Perdices Malbec", precio_3_8: 10000, precio_3_4: 16000 },
+        { nombre: "Las Perdices Red Blend", precio_3_4: 16000 },
+        { nombre: "Las Perdices Reserva Malbec", precio_3_8: 13000, precio_3_4: 21000 }
+      ]
+    },
+    {
+      bodega: "Salentein",
+      items: [
+        { nombre: "Portillo Malbec", precio_3_8: 8000, precio_3_4: 12000 },
+        { nombre: "Killka Malbec", precio_3_4: 14000 },
+        { nombre: "Salentein Reserva Malbec", precio_3_8: 13000, precio_3_4: 20000 },
+        { nombre: "Numina Malbec", precio_3_4: 25000 }
+      ]
+    },
+    {
+      bodega: "Trivento",
+      items: [
+        { nombre: "Trivento Golden Reserve Malbec", precio_3_4: 27000 },
+        { nombre: "Trivento Reserve Malbec", precio_3_4: 15000 },
+        { nombre: "Trivento Maximum Red Blend", precio_3_4: 15000 },
+        { nombre: "Casillero del Diablo Malbec", precio_3_4: 14000 },
+        { nombre: "Trivento Private Reserve Malbec", precio_3_4: 15000 }
+      ]
+    },
+    {
+      bodega: "Terrazas de los Andes",
+      items: [
+        { nombre: "Origen Las Compuertas", precio_3_4: 32000 },
+        { nombre: "Reserva Malbec", precio_3_4: 26000 },
+        { nombre: "Reserva Cabernet Sauvignon", precio_3_4: 26000 }
+      ]
+    },
+    {
+      bodega: "Altos del Plata",
+      items: [
+        { nombre: "Altos del Plata Malbec", precio_3_4: 17500 },
+        { nombre: "Altos del Plata Cabernet Sauvignon", precio_3_4: 17500 }
+      ]
+    },
+    {
+      bodega: "Sottano",
+      items: [
+        { nombre: "Sottano Malbec", precio_3_4: 14000 }
+      ]
+    },
+    {
+      bodega: "Familia Zuccardi",
+      items: [
+        { nombre: "Santa Julia Malbec", precio_3_4: 9500 },
+        { nombre: "Santa Julia Dulce Tinto", precio_3_4: 11500 }
+      ]
+    }
+  ],
+
+  espumantes: [
+    { nombre: "Baron B Extra Brut Cuvee Speciale", precio: 37000 },
+    { nombre: "Chandon Extra Brut", precio: 27000 },
+    { nombre: "Chandon Demi Sec", precio: 27000 },
+    { nombre: "Chandon Aperitif", precio: 27000 },
+    { nombre: "Chandon Delice", precio: 27000 },
+    { nombre: "Chandon Delice Rosé", precio: 27000 },
+    { nombre: "Mercier Extra Brut", precio: 15000 },
+    { nombre: "Partridge Extra Brut", precio: 15000 },
+    { nombre: "Salentein Brut Rosé", precio: 25000 },
+    { nombre: "Salentein Brut Nature", precio: 25000 },
+    { nombre: "Nieto Senetiner Brut Nature", precio: 24000 }
+  ]
+};

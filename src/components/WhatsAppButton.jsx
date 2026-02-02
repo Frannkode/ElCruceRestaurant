@@ -4,6 +4,7 @@ const WhatsAppButton = () => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
   const isCartaPage = location.pathname === '/carta';
+  const isBebidaPage = location.pathname === '/bebidas';
 
   const handleClick = () => {
     const message = "Hola! Me gustaría hacer una consulta sobre Restaurant El Cruce.";
@@ -11,7 +12,7 @@ const WhatsAppButton = () => {
     window.open(whatsappUrl, '_blank');
   };
 
-  if (!isHomePage && !isCartaPage) return null;
+  if (!isHomePage && !isCartaPage && !isBebidaPage) return null;
 
   return (
     <button
