@@ -12,7 +12,7 @@ const CartaPage = () => {
         }
         .cartapage * {
           font-family: 'SN Pro', sans-serif !important;
-          font-weight: 700 !important;
+          font-weight: 00 !important;
         }
       `}</style>
       {menuData.categoriesOrder.filter(categoryKey => Array.isArray(menuData[categoryKey])).map((categoryKey, categoryIndex) => (
