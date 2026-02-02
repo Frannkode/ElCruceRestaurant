@@ -11,8 +11,8 @@ const CartaPage = () => {
           height: 1px;
         }
         .cartapage * {
-          font-family: 'SN Pro', sans-serif !important;
-          font-weight: 00 !important;
+          font-family: 'Montserrat', sans-serif !important;
+          font-weight: 700 !important;
         }
       `}</style>
       {menuData.categoriesOrder.filter(categoryKey => Array.isArray(menuData[categoryKey])).map((categoryKey, categoryIndex) => (
