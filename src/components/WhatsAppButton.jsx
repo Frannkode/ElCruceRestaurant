@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 const WhatsAppButton = () => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
+  const isCartaPage = location.pathname === '/carta';
 
   const handleClick = () => {
     const message = "Hola! Me gustaría hacer una consulta sobre Restaurant El Cruce.";
@@ -10,7 +11,7 @@ const WhatsAppButton = () => {
     window.open(whatsappUrl, '_blank');
   };
 
-  if (!isHomePage) return null;
+  if (!isHomePage && !isCartaPage) return null;
 
   return (
     <button

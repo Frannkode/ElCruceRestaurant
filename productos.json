@@ -1,0 +1,512 @@
+[
+  {
+    "category": "Entradas",
+    "items": [
+      {
+        "name": "Empanadas",
+        "price": 3000,
+        "description": "De pescado, carne, jamón y queso"
+      },
+      {
+        "name": "Tablita El Cruce",
+        "price": 11000,
+        "description": "Cubos de queso macerado, queso azul, jamón crudo, bondiola, aceitunas  y escabeche de vegetales, tostadas y panes"
+      },
+      {
+        "name": "Provoleta Especiada",
+        "price": 10000,
+        "description": "Con hojas verdes"
+      },
+      {
+        "name": "Queso Rebozado",
+        "price": 10500,
+        "description": "Con salsa de Roquefort"
+      },
+      {
+        "name": "Rabas A La Romana",
+        "price": 15000,
+        "description": "Con emulsión de limón y perejil"
+      },
+      {
+        "name": "Tira De Pollo Rebozado Con Barbacoa",
+        "price": 9000,
+        "description": ""
+      }
+    ]
+  },
+  {
+    "category": "Menu Infantil",
+    "items": [
+      {
+        "name": "Tira De Pollo Rebozado  Con  Papas Fritas",
+        "price": 15000,
+        "description": ""
+      },
+      {
+        "name": "Milanesa De Car Ne O Pollo",
+        "price": 15500,
+        "description": "Con papas fritas o puré"
+      },
+      {
+        "name": "Pastas Caseras",
+        "price": 14500,
+        "description": "Ravioles, Ñoquis, Tallarines c on salsa o crema"
+      }
+    ]
+  },
+  {
+    "category": "Wi-Fi 20405060",
+    "items": [
+      {
+        "name": "Cubierto Por Persona",
+        "price": 3500,
+        "description": "|                                                                                                                                                                      |"
+      }
+    ]
+  },
+  {
+    "category": "Principales",
+    "items": [
+      {
+        "name": "Salm On Rosado",
+        "price": 33000,
+        "description": "A la plancha, con salsa de morrones cebolla y champiñón, con guarnición  de arroz amarillo y papa natural"
+      },
+      {
+        "name": "Surub I Al Gran Paran A",
+        "price": 20000,
+        "description": "Acompañado de acelga , zanahorias , arvejas,  papa s cubo  y salsa crema ."
+      },
+      {
+        "name": "Surub I El Cruce",
+        "price": 19000,
+        "description": "Con cebolla , champiñón, y papas cubos"
+      },
+      {
+        "name": "Surub I A La Americana",
+        "price": 19000,
+        "description": "Con c ebolla, tomate, gratina do con queso y papas cubos"
+      },
+      {
+        "name": "Pollo A La Americana",
+        "price": 16000,
+        "description": "Con C ebolla, tomate, gratina do con queso y papas cubos"
+      },
+      {
+        "name": "Pollo A La Riojana",
+        "price": 16000,
+        "description": "Con c ebolla, arvejas,  morrón, jamón c ocido, papas cubos  y huevo"
+      },
+      {
+        "name": "Pollo Al Champignon",
+        "price": 16000,
+        "description": "Con papas cubos"
+      },
+      {
+        "name": "Lomo A La Riojana",
+        "price": 21500,
+        "description": "Con c ebolla, arvejas,  morrón,  jamón cocido , papas cubos  y huevo"
+      },
+      {
+        "name": "Lomo A La Americana",
+        "price": 21500,
+        "description": "Con cebolla, tomate, gratinado con queso y papas cubos"
+      },
+      {
+        "name": "Milanesa De Carne",
+        "price": 16000,
+        "description": "Con papas fritas a caballo"
+      },
+      {
+        "name": "Bife De Chorizo",
+        "price": 23000,
+        "description": "Con salsa de hongos  y papas cubos"
+      },
+      {
+        "name": "Matambre De Cerdo",
+        "price": 18000,
+        "description": "A la pizza con papas fritas"
+      },
+      {
+        "name": "Churrasco De Cerdo",
+        "price": 18000,
+        "description": "A la mostaza con papas cubos ."
+      },
+      {
+        "name": "Men U Vegetariano",
+        "price": 12000,
+        "description": "Rotolo E l Cruce  (Fideo relleno de acelga , zapallo, y ricota con salsa roja ) |                                                                                                                                                                      |"
+      }
+    ]
+  },
+  {
+    "category": "Pastas",
+    "items": [
+      {
+        "name": "Rotolo El Cruce",
+        "price": 8000,
+        "description": "Relleno de acelga, zapallo, ricota"
+      },
+      {
+        "name": "Tallarines Caseros",
+        "price": 8000,
+        "description": ""
+      },
+      {
+        "name": "Ravioles De Verdura",
+        "price": 8000,
+        "description": ""
+      },
+      {
+        "name": "Canelones De Verdura / Humita",
+        "price": 8000,
+        "description": ""
+      },
+      {
+        "name": "Ñoquis De Papa",
+        "price": 8000,
+        "description": ""
+      },
+      {
+        "name": "Sorrentino De Jamon Y Queso",
+        "price": 8500,
+        "description": ""
+      },
+      {
+        "name": "Tallarines Con Frutos De Mar",
+        "price": 20000,
+        "description": "Los precios de las pastas son sin cremas y salsas"
+      }
+    ]
+  },
+  {
+    "category": "Cremas Y Salsas",
+    "items": [
+      {
+        "name": "Crema De Leche",
+        "price": 4000,
+        "description": ""
+      },
+      {
+        "name": "Salsa De Tomate",
+        "price": 4000,
+        "description": ""
+      },
+      {
+        "name": "Salsa Mixta",
+        "price": 4000,
+        "description": ""
+      },
+      {
+        "name": "Pesto",
+        "price": 4000,
+        "description": ""
+      },
+      {
+        "name": "Rossini",
+        "price": 4500,
+        "description": ""
+      },
+      {
+        "name": "Parisienne",
+        "price": 4500,
+        "description": ""
+      },
+      {
+        "name": "Bolognesa",
+        "price": 4500,
+        "description": ""
+      },
+      {
+        "name": "Salsa De Camarones",
+        "price": 10000,
+        "description": ""
+      },
+      {
+        "name": "Agregado De Pecceto",
+        "price": 5000,
+        "description": "|                                                                                                                                                                      |"
+      }
+    ]
+  },
+  {
+    "category": "Carnes",
+    "items": [
+      {
+        "name": "Filet De Surub I",
+        "price": 12500,
+        "description": ""
+      },
+      {
+        "name": "Pacu Despinado",
+        "price": 13000,
+        "description": ""
+      },
+      {
+        "name": "Salmon Rosado A La Pla Ncha",
+        "price": 27000,
+        "description": ""
+      },
+      {
+        "name": "Boga Despinada",
+        "price": 12500,
+        "description": ""
+      },
+      {
+        "name": "Entrecot",
+        "price": 16000,
+        "description": ""
+      },
+      {
+        "name": "Bife De Chorizo",
+        "price": 16000,
+        "description": ""
+      },
+      {
+        "name": "Lomo A La Pla Ncha",
+        "price": 16000,
+        "description": ""
+      },
+      {
+        "name": "Milanesa De Carne",
+        "price": 10000,
+        "description": ""
+      },
+      {
+        "name": "Milanesa De Pollo",
+        "price": 9000,
+        "description": ""
+      },
+      {
+        "name": "Milanesa De Surubi  ……………………………………………………………",
+        "price": 12500,
+        "description": ""
+      },
+      {
+        "name": "Matambre De Cerdo",
+        "price": 12000,
+        "description": ""
+      },
+      {
+        "name": "Churrasco De Cerdo",
+        "price": 12000,
+        "description": ""
+      },
+      {
+        "name": "Pollo A La P Lancha",
+        "price": 9000,
+        "description": ""
+      }
+    ]
+  },
+  {
+    "category": "Adicionales",
+    "items": [
+      {
+        "name": "Napolitana  / A La Pizza  / Gratinado",
+        "price": 3500,
+        "description": "Sin papas."
+      },
+      {
+        "name": "Salsas",
+        "price": 7000,
+        "description": "Crema / Champiñón  /Crema de arvejas  /Crema de queso azul  /Mostaza Acompañada de papas cubo. |                                                                                                                                                                      |"
+      }
+    ]
+  },
+  {
+    "category": "Guarniciones",
+    "items": [
+      {
+        "name": "Arroz A La Crema",
+        "price": 5000,
+        "description": ""
+      },
+      {
+        "name": "Huevo Frito",
+        "price": 1500,
+        "description": ""
+      },
+      {
+        "name": "Pure De Papas",
+        "price": 5500,
+        "description": ""
+      },
+      {
+        "name": "Papas Fritas Con Cheddar",
+        "price": 8000,
+        "description": ""
+      },
+      {
+        "name": "Papas Españolas",
+        "price": 5000,
+        "description": ""
+      },
+      {
+        "name": "Papas Fritas",
+        "price": 5000,
+        "description": ""
+      },
+      {
+        "name": "Papas A La Crema",
+        "price": 6500,
+        "description": ""
+      },
+      {
+        "name": "Acelga A La Crema  Gratinada",
+        "price": 7000,
+        "description": ""
+      },
+      {
+        "name": "Panache De Hortaliza S",
+        "price": 6500,
+        "description": ""
+      },
+      {
+        "name": "Panache Gratinado",
+        "price": 7500,
+        "description": "|                                                                                                                                                                      |"
+      }
+    ]
+  },
+  {
+    "category": "Ensaladas",
+    "items": [
+      {
+        "name": "Simple",
+        "price": 5000,
+        "description": ""
+      },
+      {
+        "name": "Mixta",
+        "price": 5500,
+        "description": "Hojas, tomates y aros de cebolla"
+      },
+      {
+        "name": "Completa",
+        "price": 6500,
+        "description": "Lechuga, tomate, z anahoria rallada, remolacha , huevo y cebolla"
+      },
+      {
+        "name": "Rucula Y Parmesano",
+        "price": 6500,
+        "description": ""
+      },
+      {
+        "name": "Cesar",
+        "price": 8500,
+        "description": "Hojas de lechuga, tiras de pol lo, escamas de queso parmesano, crôutons y aderezo  césar"
+      },
+      {
+        "name": "Capresse",
+        "price": 8500,
+        "description": "Cubos de queso, tomate , aceitunas filete adas con aceite de  oliva y  albahaca"
+      },
+      {
+        "name": "Ensalda El Cruce",
+        "price": 6500,
+        "description": "Lechuga, tomate, zanahoria rallada, remolacha , choclo, arveja"
+      },
+      {
+        "name": "Ensalda Ele",
+        "price": 8000,
+        "description": "Rúcula,  Roquefort,  Nuez y Pera. |                                                                                                                                                                      |"
+      }
+    ]
+  },
+  {
+    "category": "Postres",
+    "items": [
+      {
+        "name": "Flan Casero",
+        "price": 4500,
+        "description": ""
+      },
+      {
+        "name": "Budin De Pan",
+        "price": 4500,
+        "description": ""
+      },
+      {
+        "name": "Panqueque De Dulce De Leche  Con Bocha Americana  $8500",
+        "price": 8500,
+        "description": ""
+      },
+      {
+        "name": "Ensalada De Frutas",
+        "price": 6500,
+        "description": ""
+      },
+      {
+        "name": "Mam On En Alm Ibar",
+        "price": 5000,
+        "description": ""
+      },
+      {
+        "name": "Isla Flotante",
+        "price": 5500,
+        "description": "Con sabayón"
+      },
+      {
+        "name": "Pera Al Vino Tinto",
+        "price": 8500,
+        "description": "Con helado de americana"
+      },
+      {
+        "name": "Brownie Con Helado De Americana",
+        "price": 8500,
+        "description": ""
+      },
+      {
+        "name": "Tiramisu",
+        "price": 7000,
+        "description": ""
+      },
+      {
+        "name": "Copa Helada",
+        "price": 12000,
+        "description": "Tres bochas de helado, dulce de leche, crema, ensalada de frutas, nueces, oblea"
+      },
+      {
+        "name": "Bomb On Escoces",
+        "price": 6000,
+        "description": ""
+      },
+      {
+        "name": "Almendrado  Damevin",
+        "price": 6000,
+        "description": ""
+      },
+      {
+        "name": "Fantasia Damevin",
+        "price": 6000,
+        "description": ""
+      }
+    ]
+  },
+  {
+    "category": "Adicional",
+    "items": [
+      {
+        "name": "Dulce De Leche",
+        "price": 1000,
+        "description": ""
+      },
+      {
+        "name": "Chantilly",
+        "price": 2000,
+        "description": ""
+      },
+      {
+        "name": "Queso",
+        "price": 3500,
+        "description": ""
+      },
+      {
+        "name": "Bocha De Helado",
+        "price": 4500,
+        "description": "Americana, limón, dulce de leche,  frutilla, almendrado, vainilla"
+      }
+    ]
+  }
+]

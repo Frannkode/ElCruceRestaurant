@@ -15,7 +15,7 @@ const MenuPage = () => {
   // Secondary categories (shown when "Más" is tapped)
   const secondaryCategories = [
     "menu_infantil", "cremas_y_salsas", "agregados", "carnes",
-    "adicionales", "guarniciones", "ensaladas", "adicional_postres", "otros"
+    "adicionales", "guarniciones", "ensaladas", "adicional_postres"
   ];
 
   // Simplified category names for mobile
@@ -32,7 +32,6 @@ const MenuPage = () => {
     ensaladas: "Ensaladas",
     postres: "Postres",
     adicional_postres: "Más Postres",
-    otros: "Otros"
   };
 
   // Get visible categories based on mobile state
@@ -60,7 +59,6 @@ const MenuPage = () => {
       ensaladas: Salad,
       postres: Cake,
       adicional_postres: Cake,
-      otros: MoreHorizontal
     };
     return icons[category] || MoreHorizontal;
   };

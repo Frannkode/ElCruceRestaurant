@@ -249,8 +249,8 @@ export const menuData = {
     { "nombre": "Queso", "precio": 3500 },
     { "nombre": "Bocha de Helado", "descripcion": "Americana, limón, dulce de leche, frutilla, almendrado, vainilla", "precio": 4500 }
   ],
-  otros: {
-    "cubierto_por_persona": 3500,
-    "wifi": "20405060"
-  }
+  otros: [
+    { "nombre": "Cubierto por persona", "precio": 3500 },
+    { "nombre": "wifi 20405060", "precio": "" }
+  ]
 }
