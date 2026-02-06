@@ -69,9 +69,38 @@ const CartPage = () => {
     setValidationErrors({});
     setShowValidationMessage(false);
 
-    const message = `¡Hola! 👋 Me gustaría hacer un pedido:\n\n🧾 *Detalles del Pedido:*\n${safeItems.map(item => `${item.nombre} x${item.quantity} - $${(item.precio * item.quantity).toLocaleString()}`).join('\n')}\n\n💰 *Total: $${total.toLocaleString()}${customerInfo.deliveryMethod === 'delivery' ? ' (+ Delivery)' : ''}*\n\n👤 *Información del Cliente:*\n${customerInfo.deliveryMethod === 'delivery' ? `📍 Dirección: ${customerInfo.address}\n` : ''}📞 Teléfono: ${customerInfo.phone}\n${customerInfo.observations ? `📝 Observaciones: ${customerInfo.observations}\n` : ''}${customerInfo.deliveryMethod === 'delivery' ? '🚚 Delivery' : '🏪 Retiro en local'}`;
+    // Construir mensaje con saltos de línea y emojis Unicode reales
+    const itemsDetail = safeItems
+      .map(item => `${item.nombre} x${item.quantity} - $${(item.precio * item.quantity).toLocaleString()}`)
+      .join('\n');
 
-    const whatsappUrl = `https://wa.me/5493482577245?text=${encodeURIComponent(message)}`;
+    const deliveryInfo = customerInfo.deliveryMethod === 'delivery'
+      ? `📍 Dirección: ${customerInfo.address}\n`
+      : '';
+
+    const observationsInfo = customerInfo.observations
+      ? `📝 Observaciones: ${customerInfo.observations}\n`
+      : '';
+
+    const deliveryMethod = customerInfo.deliveryMethod === 'delivery'
+      ? '🚚 Delivery'
+      : '🏪 Retiro en local';
+
+    const deliveryLabel = customerInfo.deliveryMethod === 'delivery' ? ' (+ Delivery)' : '';
+
+    const message = `¡Hola! 👋 Me gustaría hacer un pedido:
+
+🛒 *Detalles del Pedido:*
+${itemsDetail}
+
+💰 *Total: $${total.toLocaleString()}${deliveryLabel}*
+
+👤 *Información del Cliente:*
+${deliveryInfo}📞 Teléfono: ${customerInfo.phone}
+${observationsInfo}${deliveryMethod}`;
+
+    // Aplicar encodeURIComponent solo una vez al mensaje completo
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=5493482577245&text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 

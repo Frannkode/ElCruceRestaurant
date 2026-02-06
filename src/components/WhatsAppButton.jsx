@@ -7,8 +7,10 @@ const WhatsAppButton = () => {
   const isBebidaPage = location.pathname === '/bebidas';
 
   const handleClick = () => {
-    const message = "Hola! Me gustaría hacer una consulta sobre Restaurant El Cruce.";
-    const whatsappUrl = `https://wa.me/5493482577245?text=${encodeURIComponent(message)}`;
+    const message = `¡Hola! 👋 Me gustaría hacer una consulta sobre Restaurant El Cruce.`;
+    
+    // Aplicar encodeURIComponent solo una vez al mensaje completo
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=5493482577245&text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 
