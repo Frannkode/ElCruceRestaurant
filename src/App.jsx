@@ -11,6 +11,10 @@ import WhatsAppButton from './components/WhatsAppButton';
 import BebidasButton from './components/BebidasButton';
 import CartaButton from './components/CartaButton';
 
+/**
+ * Top-level application component that configures client-side routes and page layout.
+ * @returns {JSX.Element} The root JSX element containing the header, routed main content, footer, and WhatsApp button.
+ */
 function App() {
   return (
     <Router>
